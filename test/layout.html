@@ -1,0 +1,45 @@
+<Layout class="layout home">
+  <Header :style="{position: 'fixed', width: '100%', 'z-index': 99, 'background': '#495060'}">
+    <Row>
+      <!-- <Col span="3">
+      <div class="layout-logo">
+        <Icon type="md-settings"></Icon>后端
+      </div>
+      </Col>
+      <Col span="18"> -->
+      <!--  -->
+      <Menu mode="horizontal"
+            theme="dark"
+            :active-name="activeName"
+            style="background: #495060">
+        <MenuItem name="1"
+                  @click.native="$router.push('/board/list')">
+        <Icon type="ios-navigate"></Icon>
+        看板
+        </MenuItem>
+        <MenuItem name="2"
+                  @click.native="$router.push('/charts/list')">
+        <Icon type="ios-keypad"></Icon>
+        图表列表
+        </MenuItem>
+      </Menu>
+      </Col>
+      <Col span="3">
+      <div class="user-info">
+        <Dropdown>
+          <a href="javascript:void(0)">
+            {{name}}
+            <Icon type="md-arrow-dropdown"></Icon>
+          </a>
+          <DropdownMenu slot="list">
+            <DropdownItem @click.native="logout">注销</DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
+      </div>
+      </Col>
+    </Row>
+  </Header>
+  <Content style="padding-top: 64px">
+    <router-view />
+  </Content>
+</Layout>

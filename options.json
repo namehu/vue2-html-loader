@@ -1,0 +1,15 @@
+{
+  "type": "object",
+  "properties": {
+    "removeComments": {
+      "type": "boolean"
+    },
+    "removeWhiteSpace": {
+      "type": "boolean"
+    },
+    "removeNewline": {
+      "type": "boolean"
+    }
+  },
+  "additionalProperties": false
+}
