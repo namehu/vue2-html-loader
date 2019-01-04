@@ -1,13 +1,13 @@
 {
   "name": "vue2-html-loader",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A webpack loader handle .html file for Vue2",
   "private": false,
   "author": "namehu",
   "main": "index.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/namehu/vue2-html-loader.git"
+    "url": "https://github.com/namehu/vue2-html-loader.git"
   },
   "scripts": {
     "test": "jest"
@@ -19,7 +19,6 @@
     "webpack",
     "loader"
   ],
-  "author": "namehu",
   "license": "ISC",
   "devDependencies": {
     "@babel/cli": "^7.1.5",
