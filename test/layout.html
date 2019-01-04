@@ -1,45 +1,58 @@
-<Layout class="layout home">
-  <Header :style="{position: 'fixed', width: '100%', 'z-index': 99, 'background': '#495060'}">
-    <Row>
-      <!-- <Col span="3">
-      <div class="layout-logo">
-        <Icon type="md-settings"></Icon>后端
-      </div>
-      </Col>
-      <Col span="18"> -->
-      <!--  -->
-      <Menu mode="horizontal"
-            theme="dark"
-            :active-name="activeName"
-            style="background: #495060">
-        <MenuItem name="1"
-                  @click.native="$router.push('/board/list')">
-        <Icon type="ios-navigate"></Icon>
-        看板
-        </MenuItem>
-        <MenuItem name="2"
-                  @click.native="$router.push('/charts/list')">
-        <Icon type="ios-keypad"></Icon>
-        图表列表
-        </MenuItem>
-      </Menu>
-      </Col>
-      <Col span="3">
-      <div class="user-info">
-        <Dropdown>
-          <a href="javascript:void(0)">
-            {{name}}
-            <Icon type="md-arrow-dropdown"></Icon>
-          </a>
-          <DropdownMenu slot="list">
-            <DropdownItem @click.native="logout">注销</DropdownItem>
-          </DropdownMenu>
-        </Dropdown>
-      </div>
-      </Col>
-    </Row>
-  </Header>
-  <Content style="padding-top: 64px">
-    <router-view />
-  </Content>
-</Layout>
+<Modal v-model="showEditModal"
+       :closable="false"
+       :mask-closable="false"
+       title="添加/编辑条件"
+       class-name="rule-category-field-tree"
+       width="625">
+  <!-- 已选择标签 -->
+  <div class="rule-content">
+    <div v-show="field_name">
+      <Tag color="success">{{selectedOwner}}</Tag>
+      <Tag color="success">{{field_name}}</Tag>
+      <RuleType :type="field_type"
+                :id="Number(field_id)"
+                :field-item="field_item"
+                @on-change="onRuleTypeChange"></RuleType>
+    </div>
+  </div>
+  <!-- 条件树 -->
+  <div class="tree-content"
+       v-if="ruleCategorys.length">
+    <Tabs v-model="owner"
+          @on-click="onTabClick">
+      <TabPane v-for="(ruleCategory, index) in ruleCategorys"
+               :key="index"
+               :label="ruleCategory.owner"
+               :name="ruleCategory.owner">
+        <!-- 条件分类 -->
+        <Collapse value="0"
+                  v-if="ruleCategory.categories&&ruleCategory.categories.length">
+          <Panel v-for="(categorie, categorieIndex) in ruleCategory.categories"
+                 :key="categorieIndex"
+                 :name="`${categorieIndex}`">
+            {{categorie.category_name}}
+            <!-- 条件选择 -->
+            <div slot="content">
+              <div v-if="categorie.fields && categorie.fields.length"
+                   class="tag-content">
+                <div v-for="(field, fieldIndex) in categorie.fields"
+                     class="tag">
+                  <Tag type="border"
+                       :color="field.color? field.color:'default'"
+                       @click.native="clickTag(field,ruleCategory)"
+                       :key="fieldIndex">{{field.field_name}}</Tag>
+                </div>
+              </div>
+            </div>
+          </Panel>
+        </Collapse>
+      </TabPane>
+    </Tabs>
+  </div>
+  <div slot="footer">
+    <Button type="text"
+            @click="onModalCancel">取消</Button>
+    <Button type="primary"
+            @click="onModalOk">确定</Button>
+  </div>
+</Modal>

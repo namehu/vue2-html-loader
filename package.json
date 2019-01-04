@@ -1,6 +1,6 @@
 {
   "name": "vue2-html-loader",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "description": "A webpack loader handle .html file for Vue2",
   "private": false,
   "author": "namehu",

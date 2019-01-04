@@ -27,9 +27,8 @@ module.exports = function (source) {
     .replace(/\u2028/g, '\\u2028')
     .replace(/\u2029/g, '\\u2029');
 
-
   if (options.removeComments) {
-    text = text.replace(/(<!--.*-->)?/mg, '');
+    text = text.replace(/(<!--.*?-->)?/mg, '');
   }
   if (options.removeNewline) {
     text = text.replace(/\\r\\n( )*/g, ' ');
