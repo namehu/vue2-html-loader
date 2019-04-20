@@ -16,7 +16,10 @@ const defaultOptions = {
 }
 
 module.exports = function (source) {
-
+  const resourcePath = this.resourcePath;
+  if (/\.[render|function]\.html$/.test(resourcePath)) {
+    return source;
+  }
   let options = getOptions(this) || {};
 
   validateOptions(schema, options, 'Raw Loader');
